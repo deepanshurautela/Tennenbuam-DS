@@ -22,8 +22,7 @@ void push(Node **head, int data){
 	if (temp == NULL)
 		(*head) = newNode;
 	else{
-		temp -> prev = newNode;
-		newNode -> next = temp;
+		newNode -> next = (*head);
 		(*head) = newNode;
 	}
 	free(temp);
@@ -37,7 +36,6 @@ int pop(Node **head){
 		return -1;
 	}
 	else{
-		temp -> prev = NULL;
 		(*head) = temp -> next;
 		return temp -> data;
 	}
