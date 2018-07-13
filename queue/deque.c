@@ -15,16 +15,16 @@ Node *getNode(int data){
 }
 
 void push_right(Node **head, Node **tail, int data){
-	Node *newNode = getNode(data);
+	Node *newNode = getNode(data); //Changed to correct pointers
 	Node *temp = (*head);
 	if (temp == NULL){
 			*head = newNode;
 		}
 	
-	else{
-			while(temp -> next != NULL){
+	else{	
+
+		while(temp -> next != NULL) //Added this later. Thought that use only tail but each requires to set tail. 
 				temp = temp -> next;
-			}
 			temp -> next = newNode;
 			newNode -> prev = temp;
 			*tail = newNode;
@@ -33,11 +33,10 @@ void push_right(Node **head, Node **tail, int data){
 }
 
 void push_left(Node **head, Node **tail, int data){
-	Node *newNode = getNode(data);
+	Node *newNode = getNode(data); //Changed to correct pointers
 	Node *temp = (*head);
-	if (temp == NULL){
+	if (temp == NULL)
 			*head = newNode;
-		}
 	
 	else{
 
@@ -48,37 +47,40 @@ void push_left(Node **head, Node **tail, int data){
 	}
 }
 
-void remove_right(Node **head, Node **tail, int *val){
-	Node *temp = (*tail);
-	if (temp == NULL)
-	{
-		printf("Cannot be removed doesn't point to anything\n");
-		return;
-	}
+void remove_right(Node **head, Node **tail, int *val)   // modified This function.
+{
+    Node *temp = (*tail);
+    if (temp == NULL)
+    {
+        printf("Cannot be removed doesn't point to anything\n");
+        return;
+    }
 
-	else{
-		*val = temp -> data;
-		temp = temp -> prev;
-		(*tail) = temp;
-	}
-	free(temp);
-
+    else
+    {
+        *val = temp->data;
+        temp->prev->next = NULL;
+        (*tail) = temp->prev;
+    }
+    free(temp);
 }
 
-void remove_left(Node **head, Node **tail, int *val){
-	Node *temp = (*head);
-	if (temp == NULL)
-	{
-		printf("Cannot be removed doesn't point to anything\n");
-		return;
-	}
+void remove_left(Node **head, Node **tail, int *val)   // modified This function.
+{
+    Node *temp = (*head);
+    if (temp == NULL)
+    {
+        printf("Cannot be removed doesn't point to anything\n");
+        return;
+    }
 
-	else{
-		*val = temp -> data;
-		temp = temp -> next;
-		(*tail) = temp;
-	}
-	free(temp);
+    else
+    {
+        *val = temp->data;
+        temp->next->prev = NULL;
+        (*head) = temp->next;
+    }
+    free(temp);
 }
 
 void print_all(Node *head){
@@ -92,14 +94,19 @@ void print_all(Node *head){
 
 
 int main(int argc, char const *argv[])
-{	int *val = NULL;
+{	int ival = -1;
+	int rval = -2;
 	Node *head = NULL;
 	Node *tail = NULL;
 	for (int i = 0; i < 10; ++i){
 		push_right(&head, &tail,i);
 		push_left(&head, &tail,i);
 	}
-	remove_left(&head, &tail, val);
+	remove_left(&head, &tail, &ival);
+	printf("%d was removed\n",ival);
+	remove_right(&head, &tail, &rval);
+	remove_right(&head, &tail, &rval);
+	printf("%d was removed\n",rval);
 	print_all(head);
 	return 0;
 }
