@@ -46,6 +46,7 @@
 			if(temp == NULL)
 				return 0;
 			else{
+				//Will not work without the break 
 				while(temp -> data != x && temp -> next!= NULL){
 					temp = temp -> next;
 					if (temp -> next == NULL){
@@ -64,11 +65,11 @@
 			Node *tail = NULL;
 			for (int i = 0; i < 10; ++i)
 				push(&head, &tail,i);
-			val = search_for_val(&head, 10);
+			print_all(head);
+			val = search_for_val(&head, 2);
 				if (val)
-					printf("The value of val is %d\n", val -> data);
+					printf("The value of val is %d and is at address %p\n", val -> data, val);
 				else
 					printf("The value searched for doesn't exist\n");
-			print_all(head);
 			return 0;
 		}
