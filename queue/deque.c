@@ -14,7 +14,7 @@ Node *getNode(int data){
 	return temp;
 }
 
-void push_back(Node **head, Node **tail, int data){
+void push_right(Node **head, Node **tail, int data){
 	Node *newNode = getNode(data);
 	Node *temp = (*head);
 	if (temp == NULL){
@@ -32,7 +32,7 @@ void push_back(Node **head, Node **tail, int data){
 	}
 }
 
-void push_forward(Node **head, Node **tail, int data){
+void push_left(Node **head, Node **tail, int data){
 	Node *newNode = getNode(data);
 	Node *temp = (*head);
 	if (temp == NULL){
@@ -48,6 +48,41 @@ void push_forward(Node **head, Node **tail, int data){
 	}
 }
 
+void remove_right(Node **head, Node **tail, int *val){
+	Node *temp = (*tail);
+	if (temp == NULL)
+	{
+		printf("Cannot be removed doesn't point to anything\n");
+		return;
+	}
+
+	else{
+		*val = temp -> data;
+		temp = temp -> prev;
+		(*tail) = temp;
+	}
+	free(temp);
+
+}
+
+void remove_left(Node **head, Node **tail, int *val){
+	Node *temp = (*head);
+	if (temp == NULL)
+	{
+		printf("Cannot be removed doesn't point to anything\n");
+		return;
+	}
+
+	else{
+		printf("remove_left else condition called\n");
+		*val = temp -> data;
+		printf("%d\n",*val);
+		(*head) = (*head) -> next;
+		//(*head) = temp;
+	}
+	free(temp);
+}
+
 void print_all(Node *head){
 	Node *temp = head;
 		printf("\n");
@@ -59,13 +94,15 @@ void print_all(Node *head){
 
 
 int main(int argc, char const *argv[])
-{
+{	int *val = NULL;
 	Node *head = NULL;
 	Node *tail = NULL;
 	for (int i = 0; i < 10; ++i){
-		push_back(&head, &tail,i);
-		push_forward(&head, &tail,i);
+		push_right(&head, &tail,i);
+		push_left(&head, &tail,i);
 	}
+	remove_left(&head, &tail, val);
+	printf("Deleted %d\n",*val);
 	print_all(head);
 	return 0;
 }
