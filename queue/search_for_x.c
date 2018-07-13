@@ -58,18 +58,46 @@
 			}
 		}
 
+		Node *searchinsrt(Node **head, int x){
+			Node *newNode = getNode(x);
+			Node *temp = (*head);
+			if(temp == NULL)
+				return 0;
+			else{
+				//Will not work without the break 
+				while(temp -> data != x && temp -> next!= NULL){
+					temp = temp -> next;
+					if (temp -> next == NULL){
+						temp  -> next = newNode;
+						return newNode;
+					}
+				}
+				return temp;
+				
+		}
+	}
+
 
 		int main(int argc, char const *argv[])
-		{	Node *val = NULL;
+		{	
+			Node *val1 = NULL;
+			Node *val2 = NULL;
 			Node *head = NULL;
 			Node *tail = NULL;
 			for (int i = 0; i < 10; ++i)
 				push(&head, &tail,i);
 			print_all(head);
-			val = search_for_val(&head, 2);
-				if (val)
-					printf("The value of val is %d and is at address %p\n", val -> data, val);
+			val1 = search_for_val(&head, 2);
+				if (val1)
+					printf("The value of val is %d and is at address %p\n", val1 -> data, val1);
 				else
 					printf("The value searched for doesn't exist\n");
+			val2 = searchinsrt(&head, 30);
+				if (val2)
+					printf("The value of val is %d and is at address %p\n", val2 -> data, val2);
+				else
+					printf("The value searched for doesn't exist\n");
+			print_all(head);
+
 			return 0;
 		}
