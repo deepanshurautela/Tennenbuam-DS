@@ -50,10 +50,9 @@ void print_all(Node *head){
 
 char *convert_form_list_to_string(Node **head){
 	int count = 0;
-	int alloc_size;
 
-	char *error = (char *)malloc(sizeof(char));
-	*error = 'e';
+	char *error = (char *)malloc(sizeof(char)); // char *error = 'e' will not work
+		*error = 'e';
 	Node *temp = (*head);
 
 	if (temp == NULL){
@@ -61,14 +60,23 @@ char *convert_form_list_to_string(Node **head){
 		return error;
 	}
 
-	while(temp!= NULL){
+	while(temp -> next!= NULL){
 		count ++;
 		temp = temp -> next;
 	}
 
-	alloc_size = sizeof(char) * count;
+/*
+#####################################################
+#####################################################
+#####################################################
+#####################################################
+#####################################################
+#####################################################
+#####################################################
+*/
+	char *str = (char *)malloc(sizeof(char));
 
-	char *str = (char *)malloc(sizeof(alloc_size));
+	temp = (*head);				//Setting temp back to head, otherwise will throw segmentation error
 
 	for (int i = 0; i < count; ++i)
 	{
@@ -91,6 +99,6 @@ int main(int argc, char const *argv[])
 	for (int i = 0; i < strlen(str); ++i)
 		add_to_list(&head, str[i]);
 	print_all(head);
-	printf("%s\n",convert_form_list_to_string(&head));
+	printf("The string from the list is %s\n",convert_form_list_to_string(&head));
 	return 0;
 }
