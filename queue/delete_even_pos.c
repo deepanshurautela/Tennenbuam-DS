@@ -25,3 +25,14 @@ int main(int argc, char const *argv[])
 		printf("%d\n",arr[i]);
 	return 0;
 }
+
+
+
+void bubble_sort(struct Node *start){
+	struct Node *ptr = start;
+	struct Node *lptr = NULL;
+	int swapped;
+		do{
+			
+		}
+}

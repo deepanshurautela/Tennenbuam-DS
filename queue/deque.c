@@ -78,7 +78,7 @@ void remove_left(Node **head, Node **tail, int *val){
 		*val = temp -> data;
 		printf("%d\n",*val);
 		(*head) = (*head) -> next;
-		//(*head) = temp;
+		(*head) = temp;
 	}
 	free(temp);
 }
