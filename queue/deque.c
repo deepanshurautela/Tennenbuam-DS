@@ -74,11 +74,9 @@ void remove_left(Node **head, Node **tail, int *val){
 	}
 
 	else{
-		printf("remove_left else condition called\n");
 		*val = temp -> data;
-		printf("%d\n",*val);
-		(*head) = (*head) -> next;
-		//(*head) = temp;
+		temp = temp -> next;
+		(*tail) = temp;
 	}
 	free(temp);
 }
@@ -102,7 +100,6 @@ int main(int argc, char const *argv[])
 		push_left(&head, &tail,i);
 	}
 	remove_left(&head, &tail, val);
-	printf("Deleted %d\n",*val);
 	print_all(head);
 	return 0;
 }
