@@ -35,8 +35,10 @@ void enQueue(Node **last, char *name){
 
 void printall(Node *last){
 	Node *temp = last;
-		while(temp -> next != temp)
+		while(temp -> next != NULL){
 			printf("%s\n",temp -> name);
+			temp = temp -> next;
+		}
 }
 
 int main(int argc, char const *argv[])
