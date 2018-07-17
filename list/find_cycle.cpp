@@ -19,15 +19,11 @@ Node *getNode(int data){
 void push(Node **head, int data){
 	Node *newNode = getNode(data);
 	Node *temp = (*head);
-		if (*head == NULL){
-			newNode -> next = newNode;
+		if (*head == NULL)
 			(*head) = newNode;
-		}
 		else{
-			while(temp -> next != NULL){
+			while(temp -> next != NULL)
 				temp = temp -> next;
-			}
-			newNode -> next = (*head);
 			temp -> next = newNode;
 		}
 }
@@ -38,7 +34,6 @@ void print_nodes(Node *head){
 		while(temp -> next!= head){
 			cout << temp -> data << endl;
 			temp = temp -> next;
-			cout << "Printing" << endl;
 		}
 		cout << temp -> data << endl;
 }
@@ -46,8 +41,6 @@ void print_nodes(Node *head){
 bool detect_loop(Node *head){
 	Node *temp = head;
 	unordered_set<Node *> nodes;
-		if (head == NULL)
-			return false;
 		while(head!= NULL){
 			if (nodes.find(temp) != nodes.end())
 				return true;
@@ -64,6 +57,7 @@ int main(){
 	push(&head, 20);
 	push(&head, 20);
 	push(&head, 20);
+	//Why commenting below causes segmentation fault
 	head -> next -> next -> next -> next -> next = head;
 	if (detect_loop(head))
 		cout << "Loop present" << endl;
