@@ -35,7 +35,7 @@ void enQueue(Node **last, char *name){
 
 void printall(Node *last){
 	Node *temp = last;
-		while(temp -> next != NULL){
+		while(temp -> next != last){	//Initially was was using temp -> next != NULL was causing error
 			printf("%s\n",temp -> name);
 			temp = temp -> next;
 		}
