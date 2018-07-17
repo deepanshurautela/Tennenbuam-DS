@@ -41,7 +41,7 @@ void print_nodes(Node *head){
 bool detect_loop(Node *head){
 	Node *temp = head;
 	unordered_set<Node *> nodes;
-		while(head!= NULL){
+		while(temp!= NULL){
 			if (nodes.find(temp) != nodes.end())
 				return true;
 			nodes.insert(temp);
