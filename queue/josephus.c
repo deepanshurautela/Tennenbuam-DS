@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #define MAXSIZE 1000
 
@@ -32,57 +33,70 @@ void enQueue(Node **head, char* name){
 		}
 }
 
-void pop(Node **head, Node **del_node){
-	printf("Pop was called\n");
+
+void pop(Node **head, Node **node_to_del){
 	Node *temp = (*head);
-		if (*head == NULL)
+		if ((*head) == NULL)
 			return;
-		while(temp -> next != (*del_node) && temp != NULL){
-				printf("Passed %s\n",temp -> name);
-				temp = temp -> next;
-			}
-			temp -> next = temp -> next -> next;
+		while(temp -> next -> next != NULL && temp -> next != (*node_to_del))
+			temp = temp -> next;
+		temp -> next = temp -> next -> next;
+}
+
+
+int genarate_random_num(int range){
+	time_t t;
+	srand((unsigned) time(&t));
+	return (rand() % range);
 }
 
 void print_all(Node *head){
 	Node* temp = head;
 		while(temp != NULL){
-			printf("%s\n",temp -> name);
+			printf("\n%s\n",temp -> name);
 			temp = temp -> next;
-		}
-}
-
-
-void josephus(Node** head, int size){
-	time_t t;
-	srand((unsigned) time(&t));
-	int random = rand() % size + 1;
-	printf("Random number is %d\n",random);
-	Node *temp = (*head);
-<<<<<<< HEAD
-	Node *temp1 = NULL;
-}
-=======
-		while(temp -> next != NULL){
-		for (int i = 0; i < random; ++i)
-			temp = temp -> next;
-		printf("Just called pop\n");
-		pop(head, &temp);
-		if (temp  == NULL)
-			temp = (*head);
 		}
 	}
->>>>>>> ef0c66889eda1a8719e6250d876b04cbebfd8b47
+
+
+char *get_random_string(int length){
+	static int mySeed = 25011984;
+	char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!@&*()@#$#!@#$#";
+	size_t stringLen = strlen(string);
+	char *random_string = NULL;
+
+	srand(time(NULL) * length + ++mySeed);
+
+	if (length < 1)
+		length = 1;
+
+	random_string = malloc(sizeof(char) * (length + 1));
+
+	if (random_string)
+	{
+		short key = 0;
+		for (int i = 0; i < length; ++i)
+		{
+			key = rand() % stringLen;
+			random_string[i] = string[key];
+		}
+		random_string[length] = '\0';
+		return random_string;
+	}
+
+	else
+		return NULL;
+
+}
 
 int main(int argc, char const *argv[])
 {
 	Node *head = NULL;
-	enQueue(&head, "One");
-	enQueue(&head, "Two");
-	enQueue(&head, "Three");
-	enQueue(&head, "Four");
+	for (int i = 0; i < 10; ++i)
+	{
+		enQueue(&head, get_random_string(1000));
+	}
 	print_all(head);
 	printf("\n\n\n");
-	josephus(&head, 4);
 	return 0;	
 }
