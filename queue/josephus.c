@@ -83,7 +83,7 @@ char *get_random_string(int length){
 	}
 
 	else
-		return NULL;
+		return NULL
 
 }
 
