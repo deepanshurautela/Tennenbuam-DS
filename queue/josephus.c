@@ -83,18 +83,18 @@ char *get_random_string(int length){
 	}
 
 	else
-		return NULL
+		return NULL;
 
 }
 
-void josephus(Node **temp, int size){
-	int random_num = genarate_random_num();
-	Node *last = NULL;
-	Node *temp = (*head);
-		while(temp -> next != NULL)
-			temp = temp -> next;
-		temp -> next = (*head)			//Joining to head to make it circular 
-}
+// void josephus(Node **temp, int size){
+// 	int random_num = genarate_random_num();
+// 	Node *last = NULL;
+// 	Node *temp = (*head);
+// 		while(temp -> next != NULL)
+// 			temp = temp -> next;
+// 		temp -> next = (*head)			//Joining to head to make it circular 
+// }
 
 int main(int argc, char const *argv[])
 {
