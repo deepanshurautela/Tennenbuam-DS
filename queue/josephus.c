@@ -83,10 +83,10 @@ char *get_random_string(int length){
 		short key = 0;
 		for (int i = 0; i < length; ++i)
 		{
-			key = ((rand() % stringLen) > 0) ? (rand() % stringLen) : 1;
+			key = (rand() % stringLen); //Earlier not accessing index 0
 			random_string[i] = string[key];
 		}
-		random_string[length] = '\0';
+		random_string[length] = '\0';	//Terminating null character
 		return random_string;
 	}
 
