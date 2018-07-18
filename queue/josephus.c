@@ -59,8 +59,20 @@ void josephus(Node** head, int size){
 	int random = rand() % size + 1;
 	printf("Random number is %d\n",random);
 	Node *temp = (*head);
+<<<<<<< HEAD
 	Node *temp1 = NULL;
 }
+=======
+		while(temp -> next != NULL){
+		for (int i = 0; i < random; ++i)
+			temp = temp -> next;
+		printf("Just called pop\n");
+		pop(head, &temp);
+		if (temp  == NULL)
+			temp = (*head);
+		}
+	}
+>>>>>>> ef0c66889eda1a8719e6250d876b04cbebfd8b47
 
 int main(int argc, char const *argv[])
 {
