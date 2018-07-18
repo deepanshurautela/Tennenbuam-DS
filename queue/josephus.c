@@ -33,11 +33,14 @@ void enQueue(Node **head, char* name){
 }
 
 void pop(Node **head, Node **del_node){
+	printf("Pop was called\n");
 	Node *temp = (*head);
 		if (*head == NULL)
 			return;
-		while(temp -> next != (*del_node))
+		while(temp -> next != (*del_node) && temp != NULL){
+				printf("Passed %s\n",temp -> name);
 				temp = temp -> next;
+			}
 			temp -> next = temp -> next -> next;
 }
 
@@ -56,13 +59,15 @@ void josephus(Node** head, int size){
 	int random = rand() % size + 1;
 	printf("Random number is %d\n",random);
 	Node *temp = (*head);
+		while(temp -> next != NULL){
 		for (int i = 0; i < random; ++i)
-		{
 			temp = temp -> next;
+		printf("Just called pop\n");
+		pop(head, &temp);
+		if (temp  == NULL)
+			temp = (*head);
 		}
-			temp = temp -> next;
-			pop(head, &temp);
-}
+	}
 
 int main(int argc, char const *argv[])
 {
