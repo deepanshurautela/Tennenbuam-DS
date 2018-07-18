@@ -63,14 +63,12 @@ char *get_random_string(int length){
 	static int mySeed = 25011984;
 	char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!@&*()@#$#!@#$#";
 	size_t stringLen = strlen(string);
-	char *random_string = NULL;
+	char *random_string = random_string = malloc(sizeof(char) * (length + 1));
 
 	srand(time(NULL) * length + ++mySeed);
 
 	if (length < 1)
 		length = 1;
-
-	random_string = malloc(sizeof(char) * (length + 1));
 
 	if (random_string)
 	{
@@ -89,6 +87,15 @@ char *get_random_string(int length){
 
 }
 
+void josephus(Node **temp, int size){
+	int random_num = genarate_random_num();
+	Node *last = NULL;
+	Node *temp = (*head);
+		while(temp -> next != NULL)
+			temp = temp -> next;
+		temp -> next = (*head)			//Joining to head to make it circular 
+}
+
 int main(int argc, char const *argv[])
 {
 	Node *head = NULL;
@@ -96,6 +103,8 @@ int main(int argc, char const *argv[])
 	{
 		enQueue(&head, get_random_string(1000));
 	}
+
+
 	print_all(head);
 	printf("\n\n\n");
 	return 0;	
