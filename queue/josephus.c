@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <time.h> //Required in srand()
 #include <string.h>
 
 #define MAXSIZE 1000
@@ -24,12 +24,15 @@ Node* getNode(char *name){
 void enQueue(Node **head, char* name){
 	Node *temp = (*head);
 	Node *newNode = getNode(name);
-		if ((*head) == NULL)
+		if ((*head) == NULL){
 			(*head) = newNode;
+			newNode -> next = newNode; //!!!!!!Very Important
+		}
 		else{
-			while(temp -> next != NULL)
+			while(temp -> next != (*head))
 				temp = temp -> next;
 			temp -> next = newNode;
+			newNode -> next = (*head);
 		}
 }
 
@@ -45,24 +48,28 @@ void pop(Node **head, Node **node_to_del){
 
 
 int genarate_random_num(int range){
+	int result;
 	time_t t;
 	srand((unsigned) time(&t));
-	return (rand() % range);
+	result = rand() % range;
+	result = (result > 0) ? result : 1;
+	return (result);
 }
 
 void print_all(Node *head){
 	Node* temp = head;
 		while(temp -> next!= head){
-			printf("\n%s\n",temp -> name);
+			printf("%s ",temp -> name);
 			temp = temp -> next;
 		}
+		printf("\n");
 	}
 
 
 char *get_random_string(int length){
 	static int mySeed = 25011984;
-	//char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!@&*()@#$#!@#$#";
-	char *string = "Deepanshu";
+	char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!@&*()@#$#!@#$#";
+	//char *string = "Deepanshu";
 	size_t stringLen = strlen(string);
 	char *random_string = random_string = malloc(sizeof(char) * (length + 1));
 
@@ -76,7 +83,7 @@ char *get_random_string(int length){
 		short key = 0;
 		for (int i = 0; i < length; ++i)
 		{
-			key = rand() % stringLen;
+			key = ((rand() % stringLen) > 0) ? (rand() % stringLen) : 1;
 			random_string[i] = string[key];
 		}
 		random_string[length] = '\0';
@@ -96,12 +103,12 @@ void josephus(Node **head, int size){
 	Node *temp2 = NULL; 
 		if (*head == NULL)
 			return;
-		while(temp -> next != NULL)
-			temp = temp -> next;
-		temp -> next = (*head);		//Joining to head to make it circular 
-		temp = temp -> next;       //Setting to head
+		// while(temp -> next != NULL)
+		// 	temp = temp -> next;		//Not neccessary now fixed in enQueue
+		// temp -> next = (*head);		//Joining to head to make it circular 
+		// temp = temp -> next;       //Setting to head
 		while(temp -> next != NULL){
-			for (int i = 1; i < random_num; ++i)
+			for (int i = 2; i < random_num; ++i)
 				temp = temp -> next;
 				printf("Bye Bye %s\n",temp -> next -> name);
 				temp -> next = temp -> next -> next;
@@ -120,7 +127,7 @@ int main(int argc, char const *argv[])
 	}
 	//Before Josephus
 	printf("Before Josephus\n");
-	//print_all(head);
+	print_all(head);
 	josephus(&head, 10);
 	printf("\n\n\n");
 	return 0;	
