@@ -52,7 +52,7 @@ int genarate_random_num(int range){
 
 void print_all(Node *head){
 	Node* temp = head;
-		while(temp != NULL){
+		while(temp -> next!= head){
 			printf("\n%s\n",temp -> name);
 			temp = temp -> next;
 		}
@@ -61,7 +61,8 @@ void print_all(Node *head){
 
 char *get_random_string(int length){
 	static int mySeed = 25011984;
-	char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!@&*()@#$#!@#$#";
+	//char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!@&*()@#$#!@#$#";
+	char *string = "Deepanshu";
 	size_t stringLen = strlen(string);
 	char *random_string = random_string = malloc(sizeof(char) * (length + 1));
 
@@ -87,25 +88,40 @@ char *get_random_string(int length){
 
 }
 
-// void josephus(Node **temp, int size){
-// 	int random_num = genarate_random_num();
-// 	Node *last = NULL;
-// 	Node *temp = (*head);
-// 		while(temp -> next != NULL)
-// 			temp = temp -> next;
-// 		temp -> next = (*head)			//Joining to head to make it circular 
-// }
+void josephus(Node **head, int size){
+	int random_num = genarate_random_num(size);
+	printf("Random number is %d\n",random_num);
+	Node *last = NULL;
+	Node *temp = (*head);
+	Node *temp2 = NULL; 
+		if (*head == NULL)
+			return;
+		while(temp -> next != NULL)
+			temp = temp -> next;
+		temp -> next = (*head);		//Joining to head to make it circular 
+		temp = temp -> next;       //Setting to head
+		while(temp -> next != NULL){
+			for (int i = 1; i < random_num; ++i)
+				temp = temp -> next;
+				printf("Bye Bye %s\n",temp -> next -> name);
+				temp -> next = temp -> next -> next;
+				if(temp -> next == temp)			//Single Node only left
+					break;
+		}
+		printf("You are going to party %s\n",temp -> name);										
+}
 
 int main(int argc, char const *argv[])
 {
 	Node *head = NULL;
 	for (int i = 0; i < 10; ++i)
 	{
-		enQueue(&head, get_random_string(1000));
+		enQueue(&head, get_random_string(1));
 	}
-
-
-	print_all(head);
+	//Before Josephus
+	printf("Before Josephus\n");
+	//print_all(head);
+	josephus(&head, 10);
 	printf("\n\n\n");
 	return 0;	
 }
