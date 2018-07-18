@@ -1,6 +1,5 @@
 #include <iostream>
 #include <unordered_set>
-#include <iterator>
 
 using namespace std;
 
@@ -58,7 +57,7 @@ int main(){
 	push(&head, 20);
 	push(&head, 20);
 	//Why commenting below causes segmentation fault
-	head -> next -> next -> next -> next -> next = head;
+	head -> next -> next -> next -> next = head;
 	if (detect_loop(head))
 		cout << "Loop present" << endl;
 	else
