@@ -25,8 +25,6 @@ int sum_of_all_nodes(Node *root){
 	while(!q.empty()){
 		Node *temp = q.front();
 		q.pop();
-
-		if(temp -> right && temp -> left)
 			count += temp -> data;
 		if(temp -> right != NULL){
 			q.push(temp -> right);
