@@ -8,6 +8,11 @@ typedef struct node{
 	struct node *left, *right;
 }Node;
 
+typedef struct q_n{
+	Node *node;
+	int level;
+}queue_node;
+
 Node *getNode(int data){
 	Node *newNode = new Node;
 	newNode -> data = data;
@@ -21,25 +26,43 @@ int max(int a, int b){
 }
 
 int getDepth(Node *root){
-	int depth = -1;
-	if (root == NULL)
+	//Fringe Case 
+	if(root == NULL)
 		return 0;
-	queue<Node *>q;
-	q.push(root);
-	while(!q.empty()){
-		Node *temp = q.front();
-		q.pop();
-		if (temp -> right)
+
+	queue<queue_node> qi;
+	
+	//Adding root to the queue
+	queue_node q = {root, 1};
+	qi.push(q);
+
+	while(!qi.empty())
+	{
+		q = qi.front();		//Storing and poping the queue front 
+		qi.pop();
+
+		Node *node= q.node;		
+		int level = q.level;	//Getting level of that queue front 
+
+		if(node->left == NULL && node->right == NULL) //if no subtree, then must be leaf node 
+			//This will hit eventually thats why return 0, save from warnings
+			return level;	//returning the max depth
+
+		if (node -> left)		//if node has left subtree 
 		{
-			q.push(temp -> right);
-			depth ++;
+			q.node = node -> left; //increasing the depth and pushing it to the queue
+			q.level = level + 1;
+			qi.push(q);
 		}
-		else if(temp -> left){
-			q.push(temp -> left);
-			depth ++;
+	
+		if (node -> right)
+		{
+			q.node = node -> right;	
+			q.level = level + 1;
+			qi.push(q);
 		}
 	}
-	return depth;
+	return 0;
 }
 
 int main(int argc, char const *argv[])
