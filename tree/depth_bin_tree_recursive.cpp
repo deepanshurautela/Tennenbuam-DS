@@ -42,7 +42,7 @@ int getDepth(Node *root){
 	if(!root->right)//check left subtree
 		return getDepth(root -> left) + 1;
 	
-	return min_max(getDepth(root -> right), getDepth(root -> left), MAX) + 1;
+	return min_max(getDepth(root -> right), getDepth(root -> left), MIN) + 1;
 }
 
 int main(int argc, char const *argv[])
