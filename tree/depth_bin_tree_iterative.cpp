@@ -61,7 +61,7 @@ int getDepth(Node *root){
 			q.level = level + 1;
 			qi.push(q);
 		}
-	}
+	}//Next step will pop the queue eventually queue be empty
 	return 0;
 }
 
