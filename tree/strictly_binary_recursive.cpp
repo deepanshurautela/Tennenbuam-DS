@@ -21,10 +21,30 @@ bool strictly_binary(Node *root){
 	if (root == NULL)
 		return true;
 	
-/*	if(root->left == NULL || root -> right == NULL)
+/*							OLD VERSION OF CODE
+
+	if(root->left == NULL || root -> right == NULL)
 		cout << "Not strictly binary" << endl;
 
 	was thinking this condition to check for subtrees
+
+	What this was doing was checking only the immediate children 
+	and not determining whether the entire subtree was strict or not
+					 
+					 (5) 		(above condtion will not consider this)
+					 / \
+					/   \
+				(3)		(10) 
+				/ \		 /\
+			   /   \	/  \
+			  (2)  (1) (*)  (12)
+						|
+						|
+						No node here
+
+	strictly_binary(root->right);		Not at all helpful
+	strictly_binary(root->left);
+
 */
 
 	//If right and left child present 
@@ -52,7 +72,7 @@ int main(int argc, char const *argv[])
     root->left->right->right = getNode(11);
     root->right->right = getNode(9);
     root->right->right->left = getNode(4);
-    root->right->right->left->right = getNode(4);
+    root->right->right->left->right = getNode(4);	
     if(strictly_binary(root))
     	cout << "strictly binary" << endl;
     else
