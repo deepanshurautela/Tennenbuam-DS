@@ -21,6 +21,7 @@ Whose leaf nodes are at the max depth or max depth - 1.
 */
 
 bool almost_complete(Node *root){
+	int size = 0;
 	Node *temp = NULL;
 	queue<Node*>q;
 	if(root == NULL)
@@ -48,7 +49,16 @@ bool almost_complete(Node *root){
 				//Check whether temp -> next -> next == NULL
 				//If false that means our binary tree is not almost complete.
 
-				
+				size = q.size();
+
+				while(size){
+					temp = q.front();
+					q.pop();
+						if(temp -> left )
+					q.push(temp);
+					size --;
+				}
+
 			}
 			
 		}
