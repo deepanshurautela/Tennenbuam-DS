@@ -39,7 +39,7 @@ void mirror_tree(Node *root){
 	if(!root)
 		return;
 
-	else	//What to return ?
+	else
 			interchange(root -> right, root -> left);
 			mirror_tree(root -> right);
 			mirror_tree(root -> left);
@@ -51,11 +51,6 @@ int main(int argc, char const *argv[])
 	Node *root = 				new Node(2);
 	root->left = 				new Node(7);
     root->right	=	 			new Node(5);
-    /*root->left->right = 		new Node(6);
-    root->left->right->left = 	new Node(1);
-    root->left->right->right = 	new Node(11);
-    root->right->right = 		new Node(9);
-    root->right->right->left = 	new Node(4);*/
     cout << "\nBefore inorder traversal" << endl; 
     inorder(root);
     mirror_tree(root);
