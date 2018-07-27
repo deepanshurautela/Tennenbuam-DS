@@ -82,10 +82,10 @@ int main(int argc, char const *argv[])
 	root->left     = getNode(7);
     root->right     = getNode(5);
     root->left->right = getNode(6);
-    //root->left->right->left = getNode(1);
-    //root->left->right->right = getNode(11);
-    //root->right->right = getNode(9);
-    //root->right->right->left = getNode(4);
+    root->left->right->left = getNode(1);
+    root->left->right->right = getNode(11);
+    root->right->right = getNode(9);
+    root->right->right->left = getNode(4);
     print_status(root);
 	return 0;
 }
